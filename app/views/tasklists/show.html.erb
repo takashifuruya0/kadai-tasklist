@@ -2,9 +2,8 @@
 <%= @tasklist.id %>
 のタスク詳細</h1>
 
-<p>
-  <%= @tasklist.content %>
-</p>
+<p>Task : <%= @tasklist.content %></p>
+<p>Status : <%= @tasklist.status %></p>
 
 <%= link_to "一覧に戻る", tasklists_path %>
 

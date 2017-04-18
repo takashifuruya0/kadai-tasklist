@@ -1,4 +1,5 @@
 class TasklistsController < ApplicationController
+	before_action :set_tasklist, only: [:show,:edit,:update]
   def index
     @tasklists = Tasklist.all
   end
@@ -24,12 +25,9 @@ class TasklistsController < ApplicationController
 	end
 
 	def edit
-		@tasklist = Tasklist.find(params[:id])
 	end
 
 	def update
-		@tasklist = Tasklist.find(params[:id])
-		
 		if @tasklist.update(tasklist_params)
 			flash[:success] = "タスクは正常に登録されました"
 			redirect_to @tasklist
@@ -42,6 +40,10 @@ class TasklistsController < ApplicationController
 	private
 	# Strong 
 	def tasklist_params
-		params.require(:tasklist).permit(:content)
+		params.require(:tasklist).permit(:content, :status)
+	end
+
+  def set_tasklist
+		@tasklist = Tasklist.find(params[:id])
 	end
 end
