@@ -1,11 +1,11 @@
 class TasklistsController < ApplicationController
 	before_action :set_tasklist, only: [:show,:edit,:update]
+  
   def index
-    @tasklists = Tasklist.all
+    @tasklists = Tasklist.all.page(params[:page])
   end
 
   def show
-		@tasklist = Tasklist.find(params[:id])
   end
 
 	def new
@@ -42,8 +42,8 @@ class TasklistsController < ApplicationController
 	def tasklist_params
 		params.require(:tasklist).permit(:content, :status)
 	end
-
-  def set_tasklist
+	
+	def set_tasklist
 		@tasklist = Tasklist.find(params[:id])
 	end
 end
