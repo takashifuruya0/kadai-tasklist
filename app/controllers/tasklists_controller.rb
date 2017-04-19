@@ -1,5 +1,5 @@
 class TasklistsController < ApplicationController
-	before_action :set_tasklist, only: [:show,:edit,:update]
+	before_action :set_tasklist, only: [:show,:edit,:update, :destroy]
   
   def index
     @tasklists = Tasklist.all.page(params[:page]).per(10)
@@ -25,6 +25,13 @@ class TasklistsController < ApplicationController
 	end
 
 	def edit
+	end
+	
+	def destroy
+		@tasklist.destroy
+		
+		flash[:success] = "Task は正常に削除されました"
+		redirect_to tasklists_url
 	end
 
 	def update
