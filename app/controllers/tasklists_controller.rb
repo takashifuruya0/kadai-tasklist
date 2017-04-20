@@ -34,13 +34,13 @@ class TasklistsController < ApplicationController
 		@tasklist.destroy
 		
 		flash[:success] = "Task は正常に削除されました"
-		redirect_to tasklists_url
+		redirect_to root_url
 	end
 
 	def update
 		if @tasklist.update(tasklist_params)
 			flash[:success] = "タスクは正常に登録されました"
-			redirect_to @tasklist
+			redirect_to root_url
 		else
 			flash.now[:danger] = "タスクは登録されませんでした"
 			render :edit
@@ -58,7 +58,7 @@ class TasklistsController < ApplicationController
 	end
 	
 	def correct_user
-		@tasklist = curryent_user.tasklists.find_by(id: params[:id])
+		@tasklist = current_user.tasklists.find_by(id: params[:id])
 		unless @tasklist
 			redirect_to root_path
 		end
