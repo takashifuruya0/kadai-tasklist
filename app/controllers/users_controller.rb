@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  #before_action :require_user_logged_in, only: [:index, :show]
+  before_action :require_user_logged_in, only: [:index, :show]
   
   def index
     @users = User.all.page(params[:page])
@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    #@tasklists = @user.tasklists.order("created_at DESC").page(params[:page])
+    @tasklists = @user.tasklists.order("created_at DESC").page(params[:page])
   end
 
   def new

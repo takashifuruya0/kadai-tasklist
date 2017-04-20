@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'tasklists/create'
+
+  get 'tasklists/destroy'
+
   #get 'toppages/index'
 
   #get 'sessions/new'
